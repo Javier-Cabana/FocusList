@@ -26,8 +26,14 @@
 
 h1 {
   color: var(--color-focuslist-text);
+  margin-top: 14%;
 }
 
 ion-col {
   text-align: center;
+}
+
+#LabelPwd {
+  margin-top: 10% !important;
+  color: var(--color-focuslist-text);
 }
