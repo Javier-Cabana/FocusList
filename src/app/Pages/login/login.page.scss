@@ -1,0 +1,33 @@
+.page-content {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden; /* Oculta el exceso de .bg */
+}
+
+/* Ocultar .bg por defecto (pantallas grandes) */
+.bg {
+  display: none;
+}
+
+/* Sólo para pantallas ≤ 540px */
+@media (max-width: 540px) {
+  .bg {
+    display: block;
+    position: absolute;
+    width: 200vw;
+    height: 200vw;
+    top: -100vw;
+    left: -50vw;
+    background-color: var(--ion-color-secondary);
+    border-radius: 50%;
+  }
+}
+
+h1 {
+  color: var(--color-focuslist-text);
+}
+
+ion-col {
+  text-align: center;
+}
