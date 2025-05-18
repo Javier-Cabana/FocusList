@@ -1,5 +1,39 @@
-<ion-content [fullscreen]="true" class="flex-cointer">
-  <div class="bg">
-
-  </div>
+<ion-content [fullscreen]="true" class="page-content">
+  <!-- FONDO -->
+  <div class="bg"></div>
+  <!-- PAGINA -->
+  <ion-grid [fixed]="true">
+    <!-- TITULO -->
+    <ion-row>
+      <ion-col>
+        <h1>Iniciar sesión</h1>
+      </ion-col>
+    </ion-row>
+    <!-- FORMULARIO INICIO SESIÓN -->
+    <ion-row>
+      <ion-col>
+        <form action="POST">
+          <ion-input label="Usuario" label-placement="floating"
+            fill="outline" placeholder="Nombre de usuario o correo"></ion-input>
+          <br>
+          <ion-input label="Contraseña" label-placement="floating"
+            fill="outline" placeholder="Contraseña" type="password"></ion-input>
+          <ion-button>Iniciar sesión</ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+    <!-- ENLACE CONTRASEÑA OLVIDADA -->
+    <ion-row>
+      <ion-col>
+        <label>¿Olvidate tu contraseña?</label>
+      </ion-col>
+    </ion-row>
+    <!-- REGISTRO -->
+    <ion-row>
+      <ion-col>
+        <label>¿No tienes cuenta?</label><br>
+        <ion-button>Iniciar sesión</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
