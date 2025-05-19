@@ -40,3 +40,17 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+ion-input.custom input {
+  border: none; /* si quieres quitar cualquier borde */
+}
+
+ion-input.custom input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+ion-input.custom input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
