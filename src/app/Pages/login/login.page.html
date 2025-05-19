@@ -4,32 +4,45 @@
   <!-- PAGINA -->
   <ion-grid [fixed]="true">
     <!-- TITULO -->
-    <ion-row>
+    <ion-row class="titulo mt-16">
       <ion-col>
         <h1>Iniciar sesión</h1>
       </ion-col>
     </ion-row>
     <!-- FORMULARIO INICIO SESIÓN -->
-    <ion-row>
+    <ion-row class="mt-10 p-5">
       <ion-col>
-        <form action="POST" class="mt-5">
-          <ion-input label="Usuario" label-placement="floating"
-            fill="outline" placeholder="Nombre de usuario o correo"></ion-input>
+        <form action="POST">
+            <ion-input
+              aria-label="Usuario"
+              placeholder="Nombre de usuario o email"
+              class="custom"
+            ></ion-input>
           <br>
-          <ion-input label="Contraseña" label-placement="floating"
-            fill="outline" placeholder="Contraseña" type="password"></ion-input>
+          <ion-input
+              aria-label="Contraseña"
+              placeholder="Contraseña"
+              class="custom"
+              type="password"
+            ></ion-input>
+            <ion-input
+              aria-label="TEST"
+              placeholder="TEST"
+              class="test"
+            ></ion-input>
+            <input type="text" name="test" placeholder="test">
           <ion-button>Iniciar sesión</ion-button>
         </form>
       </ion-col>
     </ion-row>
     <!-- ENLACE CONTRASEÑA OLVIDADA -->
-    <ion-row>
+    <ion-row class="mt-16">
       <ion-col>
-        <label id="LabelPwd">¿Olvidate tu<br> contraseña?</label>
+        <a id="linkPwd">¿Olvidate tu<br> contraseña?</a>
       </ion-col>
     </ion-row>
     <!-- REGISTRO -->
-    <ion-row>
+    <ion-row class="mt-24">
       <ion-col>
         <label>¿No tienes cuenta?</label><br>
         <ion-button>Iniciar sesión</ion-button>
