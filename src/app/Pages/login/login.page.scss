@@ -26,47 +26,9 @@
 
 .titulo {
   color: var(--color-focuslist-text);
-  font-size: xx-large;
+  font-size: 2.8rem;
 }
 
 ion-col {
   text-align: center;
-}
-
-#linkPwd {
-  color: var(--color-focuslist-text);
-}
-
-ion-input.custom {
-  --background: #fff;
-  --color: #000;
-  --placeholder-color: var(--color-focuslist-text);
-  --placeholder-opacity: 0.8;
-
-  --padding-bottom: 15px;
-  --padding-end: 10px;
-  --padding-start: 10px;
-  --padding-top: 15px;
-
-  --border-radius: 13px;
-
-  outline: none;
-
-  border: 1px solid black;
-  border-radius: 13px;
-  box-shadow: 7px 7px 5px rgba(64,64,64,0.5);
-
-  --highlight-color-focused: none;
-}
-
-ion-input.test {
-  --background: #373737;
-  --color: #fff;
-  --placeholder-color: #ddd;
-  --placeholder-opacity: 0.8;
-
-  --padding-bottom: 10px;
-  --padding-end: 10px;
-  --padding-start: 10px;
-  --padding-top: 10px;
 }
