@@ -19,5 +19,25 @@ export const routes: Routes = [
   {
     path: '**',
     redirectTo: 'login',
+  },
+  {
+    path: 'listas',
+    loadComponent: () => import('./Pages/listas/listas.page').then( m => m.ListasPage),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'registro',
+    loadComponent: () => import('./Pages/registro/registro.page').then( m => m.RegistroPage)
+  },
+  {
+    path: 'tarea',
+    loadComponent: () => import('./Pages/tarea/tarea.page').then( m => m.TareaPage),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'perfil',
+    loadComponent: () => import('./Pages/perfil/perfil.page').then( m => m.PerfilPage),
+    canActivate: [authGuard],
   }
+
 ];
