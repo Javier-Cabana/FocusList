@@ -17,10 +17,6 @@ export const routes: Routes = [
     loadComponent: () => import('./Pages/login/login.page').then( m => m.LoginPage)
   },
   {
-    path: '**',
-    redirectTo: 'login',
-  },
-  {
     path: 'listas',
     loadComponent: () => import('./Pages/listas/listas.page').then( m => m.ListasPage),
     canActivate: [authGuard],
@@ -38,6 +34,9 @@ export const routes: Routes = [
     path: 'perfil',
     loadComponent: () => import('./Pages/perfil/perfil.page').then( m => m.PerfilPage),
     canActivate: [authGuard],
+  },
+  {
+    path: '**',
+    redirectTo: 'login',
   }
-
 ];

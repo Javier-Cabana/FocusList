@@ -33,7 +33,7 @@ export class LoginPage implements OnInit {
     this.auth.login({ username: this.username, email:this.email, password: this.password})
       .subscribe({
         next: () => {
-          this.router.navigateByUrl('/home', {replaceUrl: true});
+          this.router.navigateByUrl('/listas', {replaceUrl: true});
         },
         error: err => {
           console.error('Error al autenticar', err);
