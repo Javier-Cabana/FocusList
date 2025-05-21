@@ -17,15 +17,16 @@
     position: absolute;
     width: 200vw;
     height: 200vw;
-    top: -100vw;
+    top: -120vw;
     left: -50vw;
     background-color: var(--ion-color-secondary);
     border-radius: 50%;
   }
 }
 
-h1 {
+.titulo {
   color: var(--color-focuslist-text);
+  font-size: 2.8rem;
 }
 
 ion-col {
