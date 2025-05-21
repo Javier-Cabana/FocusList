@@ -12,20 +12,27 @@
     <!-- FORMULARIO INICIO SESIÓN -->
     <ion-row class="mt-14 p-5">
       <ion-col>
-        <form action="POST">
+        <form action="POST" (ngSubmit)="onLogin()" #loginForm="ngForm">
           <ion-input
-            aria-label="Usuario"
             placeholder="Nombre de usuario o email"
+            required
+            [(ngModel)]="username"
             class="custom"
+            name="username"
           ></ion-input>
           <br>
           <ion-input
-            aria-label="Contraseña"
             placeholder="Contraseña"
             class="custom"
             type="password"
+            required
+            [(ngModel)]="password"
+            name="password"
           ></ion-input>
-          <ion-button class="mt-4">Iniciar sesión</ion-button>
+          <ion-button class="mt-4"
+          type="submit"
+          [disabled]="loginForm.invalid"
+          >Iniciar sesión</ion-button>
         </form>
       </ion-col>
     </ion-row>
