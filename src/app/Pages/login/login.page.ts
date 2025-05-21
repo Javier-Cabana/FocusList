@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar,
   IonCol, IonGrid, IonRow, IonInput, IonButton } from '@ionic/angular/standalone';
 import { AuthService } from 'src/app/services/auth-service.service';
+import { ToastService } from 'src/app/services/toast-service.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,22 +16,28 @@ import { Router } from '@angular/router';
     IonCol, IonGrid, IonRow, IonInput, IonButton]
 })
 export class LoginPage implements OnInit {
-  username = ''; //Puede ser un email también
+  username = '';
+  email = '';
   password = '';
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private toast: ToastService
+  ) { }
 
   ngOnInit() {
   }
 
   onLogin(){
-    this.auth.login({ username: this.username, password: this.password})
+    this.auth.login({ username: this.username, email:this.email, password: this.password})
       .subscribe({
         next: () => {
           this.router.navigateByUrl('/home', {replaceUrl: true});
         },
         error: err => {
           console.error('Error al autenticar', err);
+          this.toast.error('Usuario o contraseña incorrectos');
         }
       })
   }
