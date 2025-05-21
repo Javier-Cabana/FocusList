@@ -1,13 +1,65 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>registro</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">registro</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="page-content">
+  <!-- FONDO -->
+  <div class="bg"></div>
+  <!-- PAGINA -->
+  <ion-grid [fixed]="true">
+    <!-- TITULO -->
+    <ion-row class="titulo mt-16">
+      <ion-col>
+        <h1 class="titulo">Crear cuenta</h1>
+      </ion-col>
+    </ion-row>
+    <!-- FORMULARIO INICIO SESIÓN -->
+    <ion-row class="mt-14 p-5">
+      <ion-col>
+        <form action="POST" (ngSubmit)="onRegistro()" #registerForm="ngForm">
+          <ion-input
+            placeholder="Nombre de usuario"
+            required
+            [(ngModel)]="username"
+            class="custom"
+            name="username"
+          ></ion-input>
+          <br>
+          <ion-input
+            placeholder="Email"
+            required
+            [(ngModel)]="email"
+            class="custom"
+            name="email"
+            type="email"
+          ></ion-input>
+          <br>
+          <ion-input
+            placeholder="Contraseña"
+            class="custom"
+            type="password"
+            [(ngModel)]="password"
+            required
+            name="password"
+          ></ion-input>
+          <br>
+          <ion-input
+            placeholder="Confirmar contraseña"
+            class="custom"
+            type="password"
+            [(ngModel)]="passwordConfirm"
+            required
+            name="passwordConfirm"
+          ></ion-input>
+          <ion-button class="mt-4"
+          [disabled]="registerForm.invalid"
+          type="submit"
+          >Registrarse</ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+    <!-- INICIO DE SESIÓN -->
+    <ion-row class="mt-24">
+      <ion-col>
+        <label class="txt" style="font-size: 20px;">¿Ya tienes cuenta?</label><br>
+        <ion-button>Iniciar sesión</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
