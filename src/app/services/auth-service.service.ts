@@ -6,6 +6,7 @@ import { JwtResponse } from '../model/i-JwtResponse';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { UsuarioCreateDTO } from '../model/i-UsuarioCreateDTO';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -27,6 +28,10 @@ export class AuthService {
   logout() {
     localStorage.removeItem('jwt_token');
     localStorage.removeItem('token_type');
+  }
+
+  registrar(usuario: UsuarioCreateDTO): Observable<any> {
+    return this.http.post(`${this.baseUrl}/autenticacion/registro`, usuario)
   }
 
   getToken(): string | null {

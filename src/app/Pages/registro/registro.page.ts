@@ -5,6 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar,
   IonCol, IonGrid, IonRow, IonInput, IonButton } from '@ionic/angular/standalone';
 import { ToastService } from 'src/app/services/toast-service.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth-service.service';
 
 @Component({
   selector: 'app-registro',
@@ -22,14 +23,34 @@ export class RegistroPage implements OnInit {
 
   constructor(
     private router: Router,
-    private toast: ToastService
+    private toast: ToastService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
   }
 
-  onRegistro(){
+  onRegistro() {
+    if (this.password !== this.passwordConfirm) {
+      this.toast.error('Las contraseñas no coinciden');
+      return;
+    }
 
+    const nuevoUsuario = {
+      username: this.username,
+      email: this.email,
+      password: this.password,
+    };
+
+    this.authService.registrar(nuevoUsuario).subscribe({
+      next: () => {
+        this.toast.success('Registro exitoso');
+        this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        const msg = err.error?.message || 'Error al registrarse';
+        this.toast.error(msg);
+      }
+    });
   }
-
 }
