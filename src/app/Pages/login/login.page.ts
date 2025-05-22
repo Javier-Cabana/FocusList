@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,
     IonCol, IonGrid, IonRow, IonInput, IonButton]
 })
+
 export class LoginPage implements OnInit {
   username = '';
   email = '';
@@ -40,5 +41,9 @@ export class LoginPage implements OnInit {
           this.toast.error('Usuario o contraseña incorrectos');
         }
       })
+  }
+
+  onRegistro(){
+    this.router.navigateByUrl('/registro', {replaceUrl: true});
   }
 }

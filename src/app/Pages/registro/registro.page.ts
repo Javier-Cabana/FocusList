@@ -53,4 +53,8 @@ export class RegistroPage implements OnInit {
       }
     });
   }
+
+  goToLogin() {
+    this.router.navigateByUrl('/login', { replaceUrl: true });
+  }
 }
