@@ -37,7 +37,8 @@
     <ion-row>
       <ion-col>
         <ion-list lines="inset">
-          <ion-reorder-group [disabled]="isReorderDisabled" (ionItemReorder)="handleReorder($event)">
+          <ion-reorder-group [disabled]="isReorderDisabled"
+          (ionItemReorder)="handleReorder($event)">
             <ion-item-sliding *ngFor="let lista of listas">
               <ion-item>
                 <ion-label>{{ lista.nombre }}</ion-label>
