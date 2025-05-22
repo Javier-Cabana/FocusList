@@ -6,35 +6,59 @@
     <!-- BOTON USUARIO -->
     <ion-row>
       <ion-col class="flex justify-end items-end">
-        <button
+        <ion-button
         fill="clear"
         class="w-[38px] h-[38px]"
         (click)="goToPerfil()"
         >
-        <img
-        src="../../../assets/icon/icono-usuario.png"
-        alt="Perfil"
-        class="w-full h-full"
-        />
-      </button>
+          <ion-icon slot="icon-only" name="person-circle" size="large" color="tertiary"></ion-icon>
+        </ion-button>
       </ion-col>
     </ion-row>
     <!-- TITULO -->
-    <ion-row class="titulo mt-16">
+    <ion-row class="titulo mt-2">
       <ion-col>
         <h1 class="titulo">Hola, Usuario<br>tus Listas</h1>
       </ion-col>
     </ion-row>
     <!-- BOTON AÑADIR -->
-    <ion-row>
+    <ion-row class="mt-2">
       <ion-col>
-
+        <ion-button
+        fill="clear"
+        class="w-[86px] h-[86px] add"
+        (click)="addLista()"
+        >
+          <img src="../../../assets/icon/add-icon.png" alt="Add icon">
+        </ion-button>
       </ion-col>
     </ion-row>
     <!-- LISTAS -->
     <ion-row>
       <ion-col>
+        <ion-list lines="inset">
+          <ion-reorder-group [disabled]="isReorderDisabled" (ionItemReorder)="handleReorder($event)">
+            <ion-item-sliding *ngFor="let lista of listas">
+              <ion-item>
+                <ion-label>{{ lista.nombre }}</ion-label>
+                <ion-reorder slot="end"></ion-reorder>
+              </ion-item>
+              <ion-item-options side="end">
+                <ion-item-option color="danger" (click)="deleteLista(lista.id)">
+                  Eliminar
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ion-reorder-group>
 
+          <!-- Añadido aquí, dentro del ion-list -->
+          <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMore($event)">
+            <ion-infinite-scroll-content
+              loadingSpinner="crescent"
+              loadingText="Cargando más listas...">
+            </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+        </ion-list>
       </ion-col>
     </ion-row>
   </ion-grid>
