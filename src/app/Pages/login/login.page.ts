@@ -18,7 +18,6 @@ import { Router } from '@angular/router';
 
 export class LoginPage implements OnInit {
   username = '';
-  email = '';
   password = '';
 
   constructor(
@@ -31,9 +30,10 @@ export class LoginPage implements OnInit {
   }
 
   onLogin(){
-    this.auth.login({ username: this.username, email:this.email, password: this.password})
+    this.auth.login({ username: this.username, password: this.password})
       .subscribe({
         next: () => {
+          localStorage.setItem('username', this.username)
           this.router.navigateByUrl('/listas', {replaceUrl: true});
         },
         error: err => {
