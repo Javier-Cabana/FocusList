@@ -32,7 +32,8 @@ export class ListasPage implements OnInit {
   listas: ListaResponseDTO[] = [];
   page = 0;
   size = 10;
-  username = 'Test'; //TODO: OBTENER DE LOCALSTORAGE
+  public username = '';
+  userId = localStorage.getItem('ID') ?? '';
   isReorderDisabled = false;
 
   constructor(
@@ -45,7 +46,7 @@ export class ListasPage implements OnInit {
   }
 
   ngOnInit():void {
-    //this.username = localStorage.getItem('username') || '';
+    this.username = localStorage.getItem('username') || '';
     this.loadListas();
   }
 
@@ -120,7 +121,7 @@ export class ListasPage implements OnInit {
 
     const dto: ListaCreateDTO = {
       nombre: nombre.trim(),
-      idUsuario: this.username
+      idUsuario: this.userId
     };
 
     this.listaService.createLista(dto).subscribe({

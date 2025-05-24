@@ -34,6 +34,7 @@ export class LoginPage implements OnInit {
       .subscribe({
         next: () => {
           localStorage.setItem('username', this.username)
+          this.auth.initUserId(this.username)
           this.router.navigateByUrl('/listas', {replaceUrl: true});
         },
         error: err => {
