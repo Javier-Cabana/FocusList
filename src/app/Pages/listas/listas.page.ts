@@ -14,7 +14,8 @@ import { HttpClient } from '@angular/common/http';
 import { ListaService } from 'src/app/services/lista-service/lista-service.service';
 import {
   ListaResponseDTO,
-  ListaCreateDTO
+  ListaCreateDTO,
+  ListaUpdateDTO
 } from 'src/app/model/i-Lista';
 
 @Component({
@@ -133,6 +134,36 @@ export class ListasPage implements OnInit {
       error: err => {
         console.log('Error al crear lista: ' + err.message)
         this.toast.error('Error al crear lista');
+      }
+    });
+  }
+
+  editLista(lista: ListaResponseDTO, slidingItem: IonItemSliding): void {
+    slidingItem.close();
+
+    // Pedimos el nuevo nombre
+    const nuevoNombre = window.prompt('Nuevo nombre de la lista:', lista.nombre);
+    if (!nuevoNombre?.trim()) {
+      this.toast.error('El nombre no puede estar vacío');
+      return;
+    }
+    // Creamos el DTO de actualización
+    const dto: ListaUpdateDTO = {
+      id: lista.id,
+      nombre: nuevoNombre.trim(),
+      idUsuario: this.userId // tu userId en UUID
+    };
+
+    // Llamada al servicio
+    this.listaService.updateLista(dto).subscribe({
+      next: updated => {
+        // Actualizamos en la vista
+        lista.nombre = updated.nombre;
+        this.toast.success('Lista actualizada correctamente');
+      },
+      error: err => {
+        console.error('Error al actualizar lista:', err);
+        this.toast.error('Error al actualizar lista');
       }
     });
   }
