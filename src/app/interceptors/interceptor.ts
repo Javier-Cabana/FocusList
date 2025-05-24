@@ -4,7 +4,7 @@ import {
   HttpRequest,
   HttpHandler,
 } from '@angular/common/http';
-import { AuthService } from '../services/auth-service.service';
+import { AuthService } from '../services/auth-service/auth-service.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {

@@ -6,12 +6,12 @@ import { IonContent, IonHeader, IonTitle, IonToolbar,
   IonList, IonItem, IonItemSliding, IonLabel, IonReorderGroup,
   IonReorder, IonItemOption, IonItemOptions, IonInfiniteScroll,
   IonInfiniteScrollContent } from '@ionic/angular/standalone';
-import { ToastService } from 'src/app/services/toast-service.service';
+import { ToastService } from 'src/app/services/toast-service/toast-service.service';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { personCircle } from 'ionicons/icons';
 import { HttpClient } from '@angular/common/http';
-import { ListaService } from 'src/app/services/lista-service.service';
+import { ListaService } from 'src/app/services/lista-service/lista-service.service';
 import {
   ListaResponseDTO,
   ListaCreateDTO

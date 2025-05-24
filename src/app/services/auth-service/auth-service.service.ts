@@ -1,12 +1,12 @@
 // src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LoginRequest } from '../model/i-LoginRequest';
-import { JwtResponse } from '../model/i-JwtResponse';
+import { LoginRequest } from '../../model/i-LoginRequest';
+import { JwtResponse } from '../../model/i-JwtResponse';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
-import { UsuarioCreateDTO } from '../model/i-UsuarioCreateDTO';
+import { environment } from '../../../environments/environment';
+import { UsuarioCreateDTO } from '../../model/i-UsuarioCreateDTO';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
