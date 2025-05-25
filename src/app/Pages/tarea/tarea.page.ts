@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { personCircle } from 'ionicons/icons';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { TareaResponseDTO } from 'src/app/model/i-Tarea';
+import { TareaCreateDTO, TareaResponseDTO, TareaUpdateDTO } from 'src/app/model/i-Tarea';
 import { Page } from 'src/app/model/i-Page';
 import { environment } from 'src/environments/environment';
 
@@ -87,15 +87,104 @@ export class TareaPage implements OnInit {
   }
 
   addTarea() {
+    const titulo = window.prompt('Título de la nueva tarea:');
+  if (!titulo?.trim()) {
+    this.toast.error('El título no puede estar vacío');
+    return;
+  }
 
+  const descripcion = window.prompt('Descripción (opcional):') || '';
+
+  // const fechaInput = window.prompt('Fecha de vencimiento (YYYY-MM-DD):');
+  let fechaVenc = '';
+  // if (fechaInput) {
+  //   const d = new Date(fechaInput);
+  //   if (isNaN(d.getTime())) {
+  //     this.toast.error('Fecha inválida');
+  //     return;
+  //   }
+  //   fechaVenc = d.toISOString();
+  // }
+
+  const dto: TareaCreateDTO = {
+    titulo: titulo.trim(),
+    descripcion: descripcion.trim(),
+    fechaVencimiento: fechaVenc,
+    idLista: this.listaId,
+    idEtiqueta: ''
+  };
+
+  this.http
+    .post<TareaResponseDTO>(`${this.apiUrl}/tarea`, dto)
+    .subscribe({
+      next: nuevaTarea => {
+        // Insertamos al principio del array para verla de inmediato
+        this.tareas.unshift(nuevaTarea);
+        this.toast.success('Tarea creada correctamente');
+      },
+      error: err => {
+        console.error('Error creando tarea:', err);
+        this.toast.error('No se pudo crear la tarea');
+      }
+    });
   }
 
   editTarea(tarea: TareaResponseDTO, slidingItem: IonItemSliding): void {
+    slidingItem.close();
 
+    const nuevoTitulo = window.prompt('Nuevo título:', tarea.titulo);
+    if (!nuevoTitulo?.trim()) {
+      this.toast.error('El título no puede estar vacío');
+      return;
+    }
+    const nuevaDesc = window.prompt('Nueva descripción (opcional):', tarea.descripcion) || '';
+
+    const dto: TareaUpdateDTO = {
+      id: tarea.id,
+      titulo: nuevoTitulo.trim(),
+      descripcion: nuevaDesc.trim(),
+      completada: tarea.completada,
+      fechaVencimiento: tarea.fechaVencimiento,
+      idLista: this.listaId,
+      idEtiqueta: tarea.idEtiqueta
+    };
+
+    this.http
+      .put<TareaResponseDTO>(`${this.apiUrl}/tarea`, dto)
+      .subscribe({
+        next: updated => {
+          // Sustituimos la tarea en el array para refrescar la vista
+          const idx = this.tareas.findIndex(t => t.id === updated.id);
+          if (idx > -1) this.tareas[idx] = updated;
+          this.toast.success('Tarea actualizada correctamente');
+        },
+        error: err => {
+          console.error('Error actualizando tarea:', err);
+          this.toast.error('No se pudo actualizar la tarea');
+        }
+      });
   }
 
-  deleteTarea(id: string): void {
 
+  deleteTarea(id: string): void {
+  this.http
+    .delete(
+      `${this.apiUrl}/tarea`,
+      {
+        body: { id },
+        responseType: 'text'
+      }
+    )
+    .subscribe({
+      next: (mensaje: string) => {
+        this.tareas = this.tareas.filter(t => t.id !== id);
+        this.toast.success(mensaje);
+      },
+      error: err => {
+        console.error('Error eliminando tarea:', err);
+        this.toast.error('No se pudo eliminar la tarea');
+      }
+    });
   }
 
   loadMore(event: any): void {
@@ -111,9 +200,15 @@ export class TareaPage implements OnInit {
     { params }
   ).subscribe({
     next: res => {
-      this.tareas.push(...res.content);
+      if (res && Array.isArray(res.content)) {
+        this.tareas.push(...res.content);
+      } else {
+        this.toast.error('No se recibieron más tareas');
+      }
+
       event.target.complete();
-      if (res.last) {
+
+      if (res && res.last) {
         event.target.disabled = true;
       }
     },
@@ -124,5 +219,4 @@ export class TareaPage implements OnInit {
     }
   });
 }
-
 }
