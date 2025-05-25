@@ -26,7 +26,7 @@ export const routes: Routes = [
     loadComponent: () => import('./Pages/registro/registro.page').then( m => m.RegistroPage)
   },
   {
-    path: 'tarea',
+    path: 'tarea/:idLista',
     loadComponent: () => import('./Pages/tarea/tarea.page').then( m => m.TareaPage),
     canActivate: [authGuard],
   },

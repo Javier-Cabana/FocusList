@@ -1,13 +1,87 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>tarea</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="page-content">
+  <!-- FONDO -->
+  <div class="bg"></div>
+  <!-- PAGINA -->
+  <ion-grid>
+    <!-- BOTON USUARIO -->
+    <ion-row>
+      <ion-col class="flex justify-end items-end">
+        <ion-button
+        fill="clear"
+        class="w-[38px] h-[38px]"
+        (click)="goToPerfil()"
+        >
+          <ion-icon slot="icon-only" name="person-circle" size="large" color="tertiary"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <!-- TITULO -->
+    <ion-row class="titulo mt-2">
+      <ion-col>
+        <h1 class="titulo">{{ lista }}</h1>
+      </ion-col>
+    </ion-row>
+    <!-- BOTON AÑADIR -->
+    <ion-row class="mt-16">
+      <ion-col>
+        <ion-button
+        fill="clear"
+        class="w-[86px] h-[86px] add"
+        (click)="addTarea()"
+        >
+          <img src="../../../assets/icon/add-icon.png" alt="Add icon">
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <!-- LISTAS -->
+    <ion-row class="mt-5 h-auto">
+      <ion-col>
+        <ion-list lines="inset">
+          <ion-reorder-group [disabled]="isReorderDisabled"
+          (ionItemReorder)="handleReorder($event)">
+          <ion-item-sliding #slidingItem *ngFor="let tarea of tareas">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">tarea</ion-title>
-    </ion-toolbar>
-  </ion-header>
+          <!-- Opciones start (swipe derecha→izquierda) -->
+          <ion-item-options side="start"
+                            (ionSwipe)="editTarea(tarea, slidingItem)">
+            <ion-item-option color="primary" expandable
+            (click)="editTarea(tarea, slidingItem)"
+            class="editar-btn">
+              Editar
+            </ion-item-option>
+          </ion-item-options>
+
+          <!-- Contenido del ítem -->
+          <ion-item>
+            <ion-label>
+              <h2>{{ tarea.titulo }}</h2>
+              <p *ngIf="tarea.descripcion">{{tarea.descripcion}}</p>
+            </ion-label>
+            <ion-reorder slot="end"></ion-reorder>
+          </ion-item>
+
+          <!-- Opciones end (swipe izquierda→derecha) -->
+          <ion-item-options side="end"
+                            (ionSwipe)="deleteTarea(tarea.id); slidingItem.close()"
+                            >
+            <ion-item-option color="danger" expandable
+            (click)="deleteTarea(tarea.id); slidingItem.close()">
+              Eliminar
+            </ion-item-option>
+          </ion-item-options>
+
+        </ion-item-sliding>
+          </ion-reorder-group>
+
+          <!-- Añadido aquí, dentro del ion-list -->
+          <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMore($event)">
+            <ion-infinite-scroll-content
+              loadingSpinner="crescent"
+              loadingText="Cargando más tareas...">
+            </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

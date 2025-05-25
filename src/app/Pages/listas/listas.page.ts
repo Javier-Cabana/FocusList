@@ -167,4 +167,12 @@ export class ListasPage implements OnInit {
       }
     });
   }
+
+   /** Navegar a la página de tareas de la lista */
+  openTareas(lista: ListaResponseDTO): void {
+    this.router.navigate(
+      ['/tarea', lista.id],
+      { queryParams: { nombre: lista.nombre } }
+    );
+  }
 }
