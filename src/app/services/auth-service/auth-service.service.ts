@@ -1,16 +1,18 @@
 // src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LoginRequest } from '../model/i-LoginRequest';
-import { JwtResponse } from '../model/i-JwtResponse';
+import { LoginRequest } from '../../model/i-LoginRequest';
+import { JwtResponse } from '../../model/i-JwtResponse';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
-import { UsuarioCreateDTO } from '../model/i-UsuarioCreateDTO';
+import { environment } from '../../../environments/environment';
+import { UsuarioCreateDTO } from '../../model/i-UsuarioCreateDTO';
+import { UsuarioResponseDTO } from 'src/app/model/i-Usuario';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private baseUrl = environment.apiUrl;
+  private userId: string = '';
 
   constructor(private http: HttpClient) {}
 
@@ -36,5 +38,22 @@ export class AuthService {
 
   getToken(): string | null {
     return localStorage.getItem('jwt_token');
+  }
+
+  initUserId(username: string): void {
+    if (!username) return;
+    this.http
+      .get<UsuarioResponseDTO>(
+        `${this.baseUrl}/users/${encodeURIComponent(username)}`
+      )
+      .subscribe({
+        next: user => {
+          this.userId = user.id;
+          localStorage.setItem('ID', this.userId)
+        },
+        error: err => {
+          console.error('No se pudo cargar perfil de usuario', err);
+        }
+      });
   }
 }

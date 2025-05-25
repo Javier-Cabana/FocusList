@@ -81,7 +81,7 @@ ion-input.custom input:focus-visible {
   color: var(--color-focuslist-text);
 }
 
-ion-button {
+ion-button.custom {
   --background: var(--ion-color-secondary);
   --background-activated: var(--color-focuslist-strong);
 

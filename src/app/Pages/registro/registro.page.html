@@ -47,7 +47,7 @@
             required
             name="passwordConfirm"
           ></ion-input>
-          <ion-button class="mt-4"
+          <ion-button class="mt-4 custom"
           [disabled]="registerForm.invalid"
           type="submit"
           >Registrarse</ion-button>
@@ -58,7 +58,7 @@
     <ion-row class="mt-24">
       <ion-col>
         <label class="txt" style="font-size: 20px;">¿Ya tienes cuenta?</label><br>
-        <ion-button (click)="goToLogin()">Iniciar sesión</ion-button>
+        <ion-button (click)="goToLogin()" class="custom">Iniciar sesión</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

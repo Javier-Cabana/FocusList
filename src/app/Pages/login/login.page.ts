@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar,
   IonCol, IonGrid, IonRow, IonInput, IonButton } from '@ionic/angular/standalone';
-import { AuthService } from 'src/app/services/auth-service.service';
-import { ToastService } from 'src/app/services/toast-service.service';
+import { AuthService } from 'src/app/services/auth-service/auth-service.service';
+import { ToastService } from 'src/app/services/toast-service/toast-service.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -34,6 +34,7 @@ export class LoginPage implements OnInit {
       .subscribe({
         next: () => {
           localStorage.setItem('username', this.username)
+          this.auth.initUserId(this.username)
           this.router.navigateByUrl('/listas', {replaceUrl: true});
         },
         error: err => {
