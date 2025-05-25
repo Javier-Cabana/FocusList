@@ -101,13 +101,13 @@ export class ListasPage implements OnInit {
   /** Elimina una lista y actualiza la vista */
   deleteLista(id: string): void {
     this.listaService.deleteLista(id).subscribe({
-      next: () => {
+      next: (mensaje: string) => {
         this.listas = this.listas.filter(l => l.id !== id);
-        this.toast.success('Lista eliminada correctamente');
+        this.toast.success(mensaje);
       },
       error: err => {
         console.log('Error al eliminar lista: ' + err.message)
-        this.toast.error('Error al eliminar lista: ');
+        this.toast.error('Error al eliminar lista: ' + (err.message || 'Error inesperado'));
       }
     });
   }

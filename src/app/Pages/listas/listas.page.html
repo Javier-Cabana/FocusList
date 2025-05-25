@@ -39,12 +39,14 @@
         <ion-list lines="inset">
           <ion-reorder-group [disabled]="isReorderDisabled"
           (ionItemReorder)="handleReorder($event)">
-            <ion-item-sliding #slidingItem *ngFor="let lista of listas">
+          <ion-item-sliding #slidingItem *ngFor="let lista of listas">
 
           <!-- Opciones start (swipe derecha→izquierda) -->
           <ion-item-options side="start"
                             (ionSwipe)="editLista(lista, slidingItem)">
-            <ion-item-option color="primary" expandable>
+            <ion-item-option color="primary" expandable
+            (click)="editLista(lista, slidingItem)"
+            class="editar-btn">
               Editar
             </ion-item-option>
           </ion-item-options>
@@ -57,8 +59,10 @@
 
           <!-- Opciones end (swipe izquierda→derecha) -->
           <ion-item-options side="end"
-                            (ionSwipe)="deleteLista(lista.id); slidingItem.close()">
-            <ion-item-option color="danger" expandable>
+                            (ionSwipe)="deleteLista(lista.id); slidingItem.close()"
+                            >
+            <ion-item-option color="danger" expandable
+            (click)="deleteLista(lista.id); slidingItem.close()">
               Eliminar
             </ion-item-option>
           </ion-item-options>

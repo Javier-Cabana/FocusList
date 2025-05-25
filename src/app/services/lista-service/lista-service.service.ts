@@ -74,14 +74,15 @@ export class ListaService {
   }
 
   /** Elimina una lista */
-  deleteLista(id: string): Observable<{ message: string }> {
+  deleteLista(id: string): Observable<string> {
     return this.http
-      .request<{ message: string }>(
-        'delete',
-        `${this.apiUrl}/listas`,
-        { body: { id } }
-      )
-      .pipe(catchError(this.handleError));
+    .delete(`${this.apiUrl}/listas`, {
+      body: { id },
+      responseType: 'text'
+    })
+    .pipe(
+      catchError(this.handleError)
+    );
   }
 
   /** Manejador de errores HTTP */
