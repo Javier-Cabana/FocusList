@@ -52,7 +52,9 @@
           </ion-item-options>
 
           <!-- Contenido del ítem -->
-          <ion-item>
+          <ion-item
+            (click)="openTareas(lista)"
+            button>
             <ion-label>{{ lista.nombre }}</ion-label>
             <ion-reorder slot="end"></ion-reorder>
           </ion-item>
