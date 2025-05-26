@@ -1,13 +1,67 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>perfil</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="page-content">
+  <!-- FONDO -->
+  <div class="bg"></div>
+  <!-- PAGINA -->
+  <ion-grid [fixed]="true">
+    <!-- TITULO -->
+    <ion-row class="titulo mt-16">
+      <ion-col>
+        <h1 class="titulo">Gestión de perfil</h1>
+      </ion-col>
+    </ion-row>
+    <!-- FORMULARIO CAMBIOS EN PERFIL -->
+    <ion-row class="mt-14 p-5">
+      <ion-col>
+        <form action="POST" #registerForm="ngForm" (ngSubmit)="onSubmit()">
+          <ion-input
+            placeholder="Nombre de usuario"
+            required
+            [(ngModel)]="username"
+            class="custom"
+            name="username"
+          ></ion-input>
+          <br>
+          <ion-input
+            placeholder="Email"
+            required
+            [(ngModel)]="email"
+            class="custom"
+            name="email"
+            type="email"
+          ></ion-input>
+          <br>
+          <ion-input
+            placeholder="Contraseña"
+            class="custom"
+            type="password"
+            [(ngModel)]="password"
+            required
+            name="password"
+          ></ion-input>
+          <br>
+          <ion-input
+            placeholder="Confirmar contraseña"
+            class="custom"
+            type="password"
+            [(ngModel)]="passwordConfirm"
+            required
+            name="passwordConfirm"
+          ></ion-input>
+          <ion-button class="mt-4 custom-no-w w-full"
+          [disabled]="registerForm.invalid"
+          type="submit"
+          >Guardar cambios</ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+    <!-- BOTONERA -->
+    <ion-row class="p-5">
+      <ion-col>
+        <ion-button (click)="onLogout()" class="custom">Cerrar sesión</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="onDelete()" class="btn-eliminar w-[150px]">Borrar perfil</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
