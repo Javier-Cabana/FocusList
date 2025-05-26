@@ -50,4 +50,15 @@ ion-col {
 .btn-eliminar {
   --background: var(--ion-color-danger);
   --color: #fff;
+
+  --background-activated: #91000a;
+  --background-focused: #91000a;
+  --background-hover: #91000a;
+
+  --border-radius: 13px;
+  --border-color: #000;
+  --border-style: solid;
+  --border-width: 1px;
+
+  --box-shadow: 7px 7px 5px rgba(64,64,64,0.5);
 }

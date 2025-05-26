@@ -9,10 +9,10 @@
         <h1 class="titulo">Gestión de perfil</h1>
       </ion-col>
     </ion-row>
-    <!-- FORMULARIO INICIO SESIÓN -->
+    <!-- FORMULARIO CAMBIOS EN PERFIL -->
     <ion-row class="mt-14 p-5">
       <ion-col>
-        <form action="POST" #registerForm="ngForm">
+        <form action="POST" #registerForm="ngForm" (ngSubmit)="onSubmit()">
           <ion-input
             placeholder="Nombre de usuario"
             required
@@ -54,13 +54,13 @@
         </form>
       </ion-col>
     </ion-row>
-    <!-- INICIO DE SESIÓN -->
+    <!-- BOTONERA -->
     <ion-row class="p-5">
       <ion-col>
-        <ion-button class="custom">Cerrar sesión</ion-button>
+        <ion-button (click)="onLogout()" class="custom">Cerrar sesión</ion-button>
       </ion-col>
       <ion-col>
-        <ion-button class="custom-no-w btn-eliminar w-[150px]">Borrar perfil</ion-button>
+        <ion-button (click)="onDelete()" class="btn-eliminar w-[150px]">Borrar perfil</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
